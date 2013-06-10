@@ -1,8 +1,8 @@
 #cd /media/Datos/Mauro/Ruby/Euler
 
 
-# No quiero unir el número a mano, así que hago lo siguiente:
-numero =
+# I don't wish to merge the number manually, so I do as follows:
+number =
 "73167176531330624919225119674426574742355349194934
 96983520312774506326239578318016984801869478851843
 85861560789112949495459501737958331952853208805511
@@ -23,24 +23,24 @@ numero =
 84580156166097919133875499200524063689912560717606
 05886116467109405077541002256983155200055935729725
 71636269561882670428252483600823257530420752963450"
-numero= numero.split(/\n/).join
+number= number.split(/\n/).join
 
 
-# Es necesario pasar el número que se desea usar como String
-def mayor_producto_de_n_digitos(string,n)
-	# Separamos los dígitos de nuestro número en un Array:
-	digitos = string.split(//)
-	longitud= string.length
-	maximo = 0
-	for i in 0..longitud-n
-		# Vamos multiplicando n números consecutivos y quedándonos con el máximo:
-		producto = digitos[i..i+n-1].inject(1) {|acum, x| acum*x.to_i}
-		maximo = [maximo, producto].max
+# The number must be passed as String
+def largest_product_of_n_digits(string,n)
+	# We split the digits of our number in an Array
+	digits = string.split(//)
+	len= string.length
+	maximum = 0
+	for i in 0..len-n
+		# We go on multiplying n consecutive numbers and keeping the largest
+		product = digits[i..i+n-1].inject(1) {|acum, x| acum*x.to_i}
+		maximum = [maximum, product].max
 	end
-	return maximo
+	return maximum
 end
 
-puts mayor_producto_de_n_digitos(numero, 5)
+puts largest_product_of_n_digits(number, 5)
 
  
 

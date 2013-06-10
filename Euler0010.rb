@@ -1,35 +1,35 @@
 #cd /media/Datos/Mauro/Ruby/Euler
 
 
-#Precondición: La lista debe contener numeros primos
-def coprimo_con_lista?(entero, lista)
-	for p in lista
-		return true if p > Math.sqrt(entero)
-		return false if entero%p == 0
+#Precondition: The list must only include prime numbers
+def coprime_with_list?(integer, list)
+	for p in list
+		return true if p > Math.sqrt(integer)
+		return false if integer%p == 0
 	end
 	return true
 end
 
 
-def primos_hasta_n(n)
-	primos = [2]
+def primes_to_n(n)
+	primes = [2]
 	test = 3
-	suma = 2
+	sum = 2
 	while test < n
-		if coprimo_con_lista?(test,primos)
-			primos << test
-			suma += test
+		if coprime_with_list?(test,primes)
+			primes << test
+			sum += test
 			puts test
 		end
-		test += 2 #No pierdo tiempo en chequear números pares
+		test += 2 #I don't waste time on checking even numbers
 	end
-	return suma, primos
+	return sum, primes
 end
 
 
-suma, primos = primos_hasta_n(2000000)
+sum, primes = primes_to_n(2000000)
 
-puts suma
+puts sum
 
 
 __END__

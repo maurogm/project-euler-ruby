@@ -1,12 +1,12 @@
 #cd /media/Datos/Mauro/Ruby/Euler
 
 
-def maximo_factor_primo(entero)
+def max_prime_factor(integer)
 	n=2
-	while n <= entero
-		if entero%n == 0
-			entero = entero / n
-			if entero == 1
+	while n <= integer
+		if integer%n == 0
+			integer = integer / n
+			if integer == 1
 				return n
 			end
 		else
@@ -15,7 +15,7 @@ def maximo_factor_primo(entero)
 	end
 end
 
-puts maximo_factor_primo(600851475143)
+puts max_prime_factor(600851475143)
 
 
 __END__

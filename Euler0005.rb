@@ -3,25 +3,25 @@
 
 
 
-# Repito la idea del Euler0003 para encontrar factores de un entero:
-def descomposicion(entero)
-	#Voy a poner los factores como llave y las potencias como valor de un Hash
-	factores = Hash[]
-	if entero == 1 	#Hago esta salvedad para evitar el caso patológico del 1
-		factores[1]=1
-		return factores
+# I repeat the idea of Euler0003 to find factors on an integer:
+def decomposition(integer)
+	#I shall put the factors as keys and the powers as values of a Hash
+	factors = Hash[]
+	if integer == 1 	#This is to avoid the pathological case of n=1
+		factors[1]=1
+		return factors
 	end
 	n=2
-	while n <= entero
-		if entero%n == 0
-			if factores.member?(n) #Si ya había dividido antes por n, sumo 1 al valor de la potencia
-				factores[n] += 1
+	while n <= integer
+		if integer%n == 0
+			if factors.member?(n) #If I had divided by n before, I add 1 to the power's value
+				factors[n] += 1
 			else
-				factores[n] = 1 	#Si es la primera vez que divido por n, lo agrego al Hash, con potencia 1
+				factors[n] = 1 	#I this is the first time I'm dividing by n, I add it to the Hash, con power = 1
 			end
-			entero = entero / n
-			if entero == 1 			#Si el entero es 1, es que ya dividí por todos sus factores
-				return factores
+			integer = integer / n
+			if integer == 1 			#If the integer is 1, it's because I have alredy divided him by all his of his factors
+				return factors
 			end
 		else
 			n += 1			
@@ -29,30 +29,30 @@ def descomposicion(entero)
 	end
 end
 
-
-def mcm(n,m)
-	# Descompongo en Hashs a los dos parámetros:
-	factores1 = descomposicion(n)
-	factores2 = descomposicion(m)
-	# Fusiono las descomposiciones, sumando las potencias de los factores repetidos:
-	mcm_hash = factores1.merge(factores2){|factor,potencia1,potencia2| [potencia1,potencia2].max}
-	# Ahora que tengo el mcm, lo escribo de nuevo como entero:
-	mcm = 1
-	mcm_num = mcm_hash.each{|factor, potencia| mcm *= factor**potencia}
-	return mcm
+# least common multiple
+def lcm(n,m)
+	# I decompose in Hashs both parameters:
+	factors1 = decomposition(n)
+	factors2 = decomposition(m)
+	# I mersh the decompositions, summing the powers of repeted factors:
+	mcm_hash = factors1.merge(factors2){|factor,power1,power2| [power1,power2].max}
+	# Now than I have the lcm, I rewrite it as an Integer:
+	lcm = 1
+	mcm_num = mcm_hash.each{|factor, power| lcm *= factor**power}
+	return lcm
 end
 
 
-#Calcula el mcm entre todos los parámetros que se pasan en una colección
-def super_mcm(coleccion)
+#Calculates the lcm between all the parameters inside a collection
+def super_lcm(collection)
 	a = 1
-	for n in coleccion
-		a=mcm(a,n)
+	for n in collection
+		a=lcm(a,n)
 	end
 	return a
 end
 
-puts super_mcm(2..20)
+puts super_lcm(2..20)
 
 
 __END__

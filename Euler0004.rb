@@ -2,10 +2,10 @@
 
 
 
-def palindromo?(string)
-	largo = string.length-1
-	for i in 0..(largo / 2)
-		if string[i] != string[largo - i]
+def palindrome?(string)
+	len = string.length-1
+	for i in 0..(len / 2)
+		if string[i] != string[len - i]
 			return false
 		end
 	end
@@ -13,16 +13,17 @@ def palindromo?(string)
 end
 
 
-# Busca el máximo palindromo formado por el producto entre el input y un
-# entero menor que él; pero que sea mayor que una cota inferior
-def maximo_palindromo_de_n(entero , cota = -Float::INFINITY)
-	for factor in entero.downto(1)
-		candidato = entero*factor
-		if candidato < cota
+
+# Looks for the maximum palindrome (higher than a lower bound) composed by
+# the product between the input and an integer lower than him
+def max_palindrome_with_n(integer , bound = -Float::INFINITY)
+	for factor in integer.downto(1)
+		candidate = integer*factor
+		if candidate < bound
 			return -Float::INFINITY
 		end
-		if palindromo?("#{candidato}")
-			return candidato
+		if candidates?("#{palindrome}")
+			return candidate
 		end
 	end
 	return -Float::INFINITY
@@ -30,19 +31,19 @@ end
 
 
 
-def maximo_palindromo(maximo_factor_permitido)
-	solucion_parcial = -Float::INFINITY
-	entero = maximo_factor_permitido
-	while entero > 0 && solucion_parcial < entero * entero	#voy a buscar mientras exista la posibilidad de mejorar la solución
-		candidato = maximo_palindromo_de_n(entero,solucion_parcial)
-		solucion_parcial = [solucion_parcial, candidato].max 
-		entero -= 1
+def max_palindrome(max_permitted_factor)
+	partial_solution = -Float::INFINITY
+	integer = max_permitted_factor
+	while integer > 0 && partial_solution < integer * integer	#voy a buscar mientras exista la posibilidad de mejorar la solución
+		candidate = max_palindrome_with_n(integer,partial_solution)
+		partial_solution = [partial_solution, candidate].max 
+		integer -= 1
 	end
-	return cota
+	return bound
 end
 
 
- puts maximo_palindromo(999)
+ puts max_palindrome(999)
 
 
 __END__

@@ -1,16 +1,16 @@
 #cd /media/Datos/Mauro/Ruby/Euler
 
-divisores_3 =	(1..333).to_a
-divisores_5 =	(1...200).to_a
-divisores_15 =	(1..1000/15).to_a
+divisors_3 =	(1..333).to_a
+divisors_5 =	(1...200).to_a
+divisors_15 =	(1..1000/15).to_a
 
-resultado =	0
+result =	0
 
-divisores_3.each 	{|x| resultado	+= x*3}
-divisores_5.each 	{|x| resultado	+= x*5}
-divisores_15.each 	{|x| resultado	-= x*15}
+divisors_3.each 	{|x| result	+= x*3}
+divisors_5.each 	{|x| result	+= x*5}
+divisors_15.each 	{|x| result	-= x*15}
 
-puts resultado
+puts result
 
 
 __END__
@@ -20,7 +20,7 @@ __END__
 
 
 
-ENUNCIADO DEL PROBLEMA:
+PROBLEMA:
 
 
 If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.
@@ -30,10 +30,11 @@ Find the sum of all the multiples of 3 or 5 below 1000.
 
 
 
-EXPLICACIÓN DE LA RESOLUCIÓN:
+EXPLICACIÓN DE LA RESOLUCIÓN: (Me da paja traducir esto)
 
 
 Para obtener todos los múltiplos de un número n, se toman los naturales y se los multiplica por n.
+
 
 Yo tengo que sumar, por ejemplo, todos los múltiplos de 3 menores que 1000. O sea, que tengo que tomar los primeros 1000/3 naturales y multiplicarlos por 3, y luego sumarlos.
 Procedo de igual manera para los múltiplos de 5 (tomando 1000/5 como cota).

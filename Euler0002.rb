@@ -4,16 +4,16 @@
 a =	0
 b =	1
 c =	1
-par =	2
-suma =	0
+even =	2
+sum =	0
 
 while c < 4000000 do
 	a = 	b
 	b = 	c
 	c = 	a+b
-	par =	(par+1)%3 		# Si par es 1 o 2, el término es impar. Si es 0 es par
-	if par==0
-		suma += c
+	even =	(even+1)%3 		# If even is 1 or 2, the term is odd. If it is 0, it's even
+	if even==0
+		sum += c
 	end
 	if c>4000000
 		puts a
@@ -23,7 +23,7 @@ while c < 4000000 do
 end
 
 
-puts suma
+puts sum
 
 
 __END__
