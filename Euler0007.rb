@@ -1,33 +1,33 @@
 #cd /media/Datos/Mauro/Ruby/Euler
 
+class Integer
+  #Precondition: The list must only include prime numbers
+  def coprime_with_list?(list)
+    for prime in list
+      return true if prime > Math.sqrt(self)
+      return false if self % prime == 0
+    end
+    return true
+  end
 
-#Precondition: The list must only include prime numbers
-def coprime_with_list?(integer, list)
-	for p in list
-		return true if p > Math.sqrt(integer)
-		return false if integer%p == 0
-	end
-	return true
+  def first_n_primes
+    primes = [2]
+    length_list = 1
+    test = 3
+    until length_list == self
+      if test.coprime_with_list?(primes)
+        primes << test
+        length_list += 1 #I keep track of this to avoid using primes.length in vain
+      end
+      test += 2 #I don't waste time on checking even numbers
+    end
+    return primes
+  end
 end
 
+primes = 10001.first_n_primes
 
-def n_primos(n)
-	primes = [2]
-	length_list = 1
-	test = 3
-	while length_list < n
-		if coprime_with_list?(test,primes)
-			primes << test
-			length_list += 1 #I keep track of this to avoid using primes.length in vain
-		end
-		test += 2 #I don't waste time on checking even numbers
-	end
-	return primes[-1], primes
-end
-
-p, primes = n_primos(10001)
-
-puts p
+puts primes.last
 
 
 

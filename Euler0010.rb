@@ -1,33 +1,31 @@
 #cd /media/Datos/Mauro/Ruby/Euler
 
+class Integer
+  #Precondition: The list must only include prime numbers
+  def coprime_with_list?(list)
+    for prime in list
+      return true if prime > Math.sqrt(self)
+      return false if self % prime == 0
+    end
+    return true
+  end
 
-#Precondition: The list must only include prime numbers
-def coprime_with_list?(integer, list)
-	for p in list
-		return true if p > Math.sqrt(integer)
-		return false if integer%p == 0
-	end
-	return true
+  def primes_to_n
+    primes = [2]
+    test = 3
+    sum = 2
+    while test < self
+      if test.coprime_with_list?(primes)
+        primes << test
+        sum += test
+      end
+      test += 2 #I don't waste time on checking even numbers
+    end
+    return sum, primes
+  end
 end
 
-
-def primes_to_n(n)
-	primes = [2]
-	test = 3
-	sum = 2
-	while test < n
-		if coprime_with_list?(test,primes)
-			primes << test
-			sum += test
-			puts test
-		end
-		test += 2 #I don't waste time on checking even numbers
-	end
-	return sum, primes
-end
-
-
-sum, primes = primes_to_n(2000000)
+sum, primes = 2_000_000.primes_to_n
 
 puts sum
 

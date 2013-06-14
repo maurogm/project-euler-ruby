@@ -1,29 +1,24 @@
 #cd /media/Datos/Mauro/Ruby/Euler
 
 
-a =	0
-b =	1
-c =	1
-even =	2
-sum =	0
+a = 0
+b = 1
+c = 1
+even = 2
+sum = 0
 
-while c < 4000000 do
-	a = 	b
-	b = 	c
-	c = 	a+b
-	even =	(even+1)%3 		# If even is 1 or 2, the term is odd. If it is 0, it's even
-	if even==0
-		sum += c
-	end
-	if c>4000000
-		puts a
-		puts b
-		puts c
-	end
+while c < 4_000_000 do
+  a = b
+  b = c
+  c = a+b
+  even = (even + 1) % 3 # If even is 1 or 2, the term is odd. If it is 0, it's even
+  if even == 0
+    sum += c
+  end
 end
 
-
 puts sum
+
 
 
 __END__
@@ -47,4 +42,4 @@ EXPLICACIÓN DE LA RESOLUCIÓN:
 Con a, b y c voy llevando cuenta de los últimos 3 términos, que es lo único que necesito.
 
 Como la sucesión de Fibonacci alterna un par cada dos impares, no necesito chequear todo el tiempo si c es par o no: basta con llevar la cuenta gracias a la variable "par".
-	Hago esto porque asumo que es mucho más fácil calcular cuánto es 2 módulo 3 que fijarse si 3524578 es par o no.
+  Hago esto porque asumo que es mucho más fácil calcular cuánto es 2 módulo 3 que fijarse si 3524578 es par o no.

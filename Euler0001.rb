@@ -6,9 +6,9 @@ divisors_15 =	(1..1000/15).to_a
 
 result =	0
 
-divisors_3.each 	{|x| result	+= x*3}
-divisors_5.each 	{|x| result	+= x*5}
-divisors_15.each 	{|x| result	-= x*15}
+divisors_3.each 	{ |x| result	+= x * 3 }
+divisors_5.each 	{ |x| result	+= x * 5 }
+divisors_15.each 	{ |x| result	-= x * 15 }
 
 puts result
 

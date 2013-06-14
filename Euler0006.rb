@@ -1,13 +1,15 @@
 #cd /media/Datos/Mauro/Ruby/Euler
 
 
-def difference(range)
-	sum_of_squares =	range.inject(0){|sum_cuad, n| sum_cuad + n**2}
-	square_of_sum =	range.inject(0){|sum_cuad, n| sum_cuad + n}**2
-	return square_of_sum - sum_of_sqares
+class Range
+  def difference
+    sum_of_squares = self.reduce(0) { |acumulator, number| acumulator + number**2 }
+    square_of_sum = self.reduce(0) { |acumulator, number| acumulator + number } **2
+    return square_of_sum - sum_of_squares
+  end
 end
 
-puts difference(1..100)
+puts (1..100).difference
 
 __END__
 
@@ -22,4 +24,4 @@ http://projecteuler.net/problem=6
 
 OBSERVACION:
 
-Aprendí .inject  ^_^
+Aprendí .reduce  ^_^

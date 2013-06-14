@@ -23,24 +23,26 @@ number =
 84580156166097919133875499200524063689912560717606
 05886116467109405077541002256983155200055935729725
 71636269561882670428252483600823257530420752963450"
-number= number.split(/\n/).join
+number = number.split(/\n/).join
 
 
-# The number must be passed as String
-def largest_product_of_n_digits(string,n)
-	# We split the digits of our number in an Array
-	digits = string.split(//)
-	len= string.length
-	maximum = 0
-	for i in 0..len-n
-		# We go on multiplying n consecutive numbers and keeping the largest
-		product = digits[i..i+n-1].inject(1) {|acum, x| acum*x.to_i}
-		maximum = [maximum, product].max
-	end
-	return maximum
+class String
+  # The string must only contain numbers
+  def largest_product_of_n_digits(digit_limit)
+    # We split the digits of our number in an Array
+    digits = self.split(//)
+    length = self.size
+    maximum = 0
+    for i in 0..length - digit_limit
+      # We go on multiplying n consecutive numbers and keeping the largest
+      product = digits[i.. i + digit_limit - 1].reduce(1) { |acum, x| acum * x.to_i }
+      maximum = [maximum, product].max
+    end
+    return maximum
+  end
 end
 
-puts largest_product_of_n_digits(number, 5)
+puts number.largest_product_of_n_digits(5)
 
  
 

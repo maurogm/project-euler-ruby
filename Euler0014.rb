@@ -1,32 +1,29 @@
 #cd /media/Datos/Mauro/Ruby/Euler
 
-def brute_force(integer)
-	candidatos = (1...integer).to_a
-	sol = 1
-	record = 0
-	while candidatos.length > 0
-		n=candidatos[0]
-		len = 0
-		while n > 1	
-			if n%2 == 0
-				n = n/2
-			else
-				n = 3*n+1
-			end
-			len += 1
-		end
-		if len >= record
-			record = len
-			sol = candidatos[0]
-		end
-		candidatos.shift
-		puts candidatos.length
-	end
-	return sol, record
+class Integer
+  def brute_force
+    candidatos = (1...self).to_a
+    sol = 1
+    record = 0
+    while candidatos.size > 0
+      n = candidatos.first
+      length = 0
+      while n > 1
+        n = (n % 2 == 0) ? (n / 2) : (3*n + 1)
+        length += 1
+      end
+      if length >= record
+        record = length
+        sol = candidatos.first
+      end
+      candidatos.shift
+      #puts candidatos.size
+    end
+    return sol, record
+  end
 end
 
-
-sol, record = brute_force(1000000)
+sol, record = 1_000_000.brute_force
 
 puts sol
 puts record
@@ -42,50 +39,50 @@ __END__
 INTENTO 2:
 
 def children(n)
-	children = [2*n]
-	if (n-1) % 3 == 0 && ((n-1)/3) % 2 == 1
-			children << (n-1)/3
-	end
-	return children
+  children = [2*n]
+  if (n-1) % 3 == 0 && ((n-1)/3) % 2 == 1
+      children << (n-1)/3
+  end
+  return children
 end
 
 def new_generation(array)
-	new_generation = []
-	for i in 0...array.length
-		new_generation += children(array[i])
-	end
-	return new_generation
+  new_generation = []
+  for i in 0...array.length
+    new_generation += children(array[i])
+  end
+  return new_generation
 end
 
 def count_valid_candidates(array,upper_bound)
-	n = 0
-	for i in (array.length-1).downto(0)
-		if array[i] <= upper_bound	
-			n += 1
-		end
-	end
-	return n
+  n = 0
+  for i in (array.length-1).downto(0)
+    if array[i] <= upper_bound  
+      n += 1
+    end
+  end
+  return n
 end
 
 def problem(bound)
-	current_generation = [8]
-	discarded_candidates = 4
-	number_of_generation = 4
-	while discarded_candidates < bound
-		current_generation = new_generation(current_generation)
-		puts discarded_candidates += count_valid_candidates(current_generation, bound)
-		puts number_of_generation += 1
-	end
-	return filter!(current_generation, bound), number_of_generation
+  current_generation = [8]
+  discarded_candidates = 4
+  number_of_generation = 4
+  while discarded_candidates < bound
+    current_generation = new_generation(current_generation)
+    puts discarded_candidates += count_valid_candidates(current_generation, bound)
+    puts number_of_generation += 1
+  end
+  return filter!(current_generation, bound), number_of_generation
 end
 
 def filter!(array, upper_bound)
-	for i in (array.length-1).downto(0)
-		if array[i] >= upper_bound	
-			array.delete(array[i])
-		end
-	end
-	return array
+  for i in (array.length-1).downto(0)
+    if array[i] >= upper_bound  
+      array.delete(array[i])
+    end
+  end
+  return array
 end
 
 
@@ -101,47 +98,47 @@ puts b
 INTENTO 1:
 
 def mayor_cadena_de_collatz
-	candidatos = (1...1000000).to_a
-	candidatos.shift
-	resultados = Hash[1,0]
-	sol = 1
-	record = 0
-	while candidatos.length > 0
-		n=candidatos[-1]
-		cadena = [n]
-		while n > 1	
-			if n%2 == 0
-				n = n/2
-			else
-				n = 3*n+1
-			end
-			if resultados[n].nil?
-				#Si no está en resultados, lo meto en la cadena
-				cadena << n
-			else
-				#Si está en resultados, quiere decir que conozco su distancia al 1
-				#Entonces, puedo calcular la distancia de todos los miembros de cadena al 1
-				d_cadena = cadena.length
-				d_candidato = resultados[n] + d_cadena
-				n == 1
-				if d_candidato > record
-					# Si la distancia del candidato al 1 es la mayor hasta el momento,
-					# entonces guardamos al candidato en la variable "sol"
-					sol = candidatos[-1]
-					record = d_candidato
-				end
-				#Ingreso las distancias de los miembros de cadena al hash de resultados
-				#Además, los saco de la lista de candidatos
-				for i in 0...d_cadena
-					resultados[cadena[i]] = d_candidato - i
-					candidatos.delete(cadena[i])
-				end
-			end
-		end
-		print candidatos.length, "<- Candidatos. Sol= ",sol,". Record = ",record
-		puts
-	end
-	return sol
+  candidatos = (1...1000000).to_a
+  candidatos.shift
+  resultados = Hash[1,0]
+  sol = 1
+  record = 0
+  while candidatos.length > 0
+    n=candidatos[-1]
+    cadena = [n]
+    while n > 1  
+      if n%2 == 0
+        n = n/2
+      else
+        n = 3*n+1
+      end
+      if resultados[n].nil?
+        #Si no está en resultados, lo meto en la cadena
+        cadena << n
+      else
+        #Si está en resultados, quiere decir que conozco su distancia al 1
+        #Entonces, puedo calcular la distancia de todos los miembros de cadena al 1
+        d_cadena = cadena.length
+        d_candidato = resultados[n] + d_cadena
+        n == 1
+        if d_candidato > record
+          # Si la distancia del candidato al 1 es la mayor hasta el momento,
+          # entonces guardamos al candidato en la variable "sol"
+          sol = candidatos[-1]
+          record = d_candidato
+        end
+        #Ingreso las distancias de los miembros de cadena al hash de resultados
+        #Además, los saco de la lista de candidatos
+        for i in 0...d_cadena
+          resultados[cadena[i]] = d_candidato - i
+          candidatos.delete(cadena[i])
+        end
+      end
+    end
+    print candidatos.length, "<- Candidatos. Sol= ",sol,". Record = ",record
+    puts
+  end
+  return sol
 end
 
 

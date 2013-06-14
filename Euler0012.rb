@@ -2,51 +2,47 @@
 
 
 
-# I copy the decomposition function from Problem 5:
-def decomposition(integer)
-	#I shall put the factors as keys and the powers as values of a Hash
-	factors = Hash[]
-	if integer == 1 	#This is to avoid the pathological case of n=1
-		factors[1]=1
-		return factors
-	end
-	n=2
-	while n <= integer
-		if integer%n == 0
-			if factors.member?(n) #If I had divided by n before, I add 1 to the power's value
-				factors[n] += 1
-			else
-				factors[n] = 1 	#I this is the first time I'm dividing by n, I add it to the Hash, con power = 1
-			end
-			integer = integer / n
-			if integer == 1 			#If the integer is 1, it's because I have alredy divided him by all his of his factors
-				return factors
-			end
-		else
-			n += 1
-		end
-	end
+class Integer
+  # I copy the decomposition function from Problem 5:
+  def decomposition
+    #I shall put the factors as keys and the powers as values of a Hash
+    decomposition = Hash[]
+    if self == 1 #This is to avoid the pathological case of n=1
+      decomposition[1] = 1
+      return decomposition
+    end
+    n=2
+    integer = self
+    until integer == 1
+      if integer % n == 0
+        decomposition[n] = decomposition.member?(n) ? decomposition[n] +1 : 1
+        integer /= n
+      else
+        n += 1
+      end
+    end
+    return decomposition
+  end
+
+  # If integer = p1^n1 + p2^n2 + ... + pm^nm, then the total quantity of divisors of 
+  # integer is equal to (n1+1)*(n2+1)*...*(nm+1)
+  def quantity_of_divisors
+    powers = self.decomposition.values
+    quantity_of_divisors = powers.reduce(1) {|acum, power| acum * (power + 1)}
+  end
+
+  def first_triangle_with_n_divisors
+    t = 0
+    m = 1
+    loop do
+      t = t + m
+      m += 1
+      return t if t.quantity_of_divisors > self
+    end
+  end
 end
 
-# If integer = p1^n1 + p2^n2 + ... + pm^nm, then the total quantity of divisors of 
-# integer is equal to (n1+1)*(n2+1)*...*(nm+1)
-def quantity_of_divisors(integer)
-	powers = dec(integer).values
-	quantity_of_divisors = powers.inject(1) {|acum, exp| acum*(exp+1)}
-end
-
-
-def first_triangle_with_n_divisors(n)
-	t=0
-	m=1
-	while 1 < 2
-		t = t+m
-		m+=1
-		return t if quantity_of_divisors(t) > n
-	end
-end
-
-puts first_triangle_with_n_divisors(500)
+puts 500.first_triangle_with_n_divisors
 
 
 __END__

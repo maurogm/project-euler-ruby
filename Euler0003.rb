@@ -1,25 +1,21 @@
 #cd /media/Datos/Mauro/Ruby/Euler
 
 
-def max_prime_factor(integer)
-	n=2
-	while n <= integer
-		if integer%n == 0
-			integer = integer / n
-			if integer == 1
-				return n
-			end
-		else
-			n += 1			
-		end
+class Integer
+	def max_prime_factor
+	  integer = self
+	  n = 2
+	  until integer == 1
+	  	integer % n == 0 ? integer /= n : n += 1
+	  end
+	  return n
 	end
 end
 
-puts max_prime_factor(600851475143)
+puts 600851475143.max_prime_factor
 
 
 __END__
-
 
 
 
